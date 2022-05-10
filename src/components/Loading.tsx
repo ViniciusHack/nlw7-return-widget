@@ -1,10 +1,21 @@
 import { CircleNotch } from "phosphor-react";
 
-export function Loading() {
+interface LoadingProps {
+  large?: boolean;
+}
+
+export function Loading({large = false}: LoadingProps) {
   return (
-    <div className="w-6 h-6 flex items-center justify-center overflow-hidden ">
-      <CircleNotch weight="bold" className="w-4 h-4 animate-spin"/>
-    </div>
+    <>
+      {large ? 
+        <div className="w-24 h-24 flex items-center justify-center overflow-hidden ">
+          <CircleNotch weight="bold" className="w-20 h-20 animate-spin"/>
+        </div>
+        :
+        <div className="w-6 h-6 flex items-center justify-center overflow-hidden ">
+          <CircleNotch weight="bold" className="w-4 h-4 animate-spin"/>
+        </div>
+      }
+    </>
   )
 }
-// ta bugado os border-radius
