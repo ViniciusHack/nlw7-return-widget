@@ -3,6 +3,6 @@ import { AuthContext } from "../contexts/AuthContext";
 
 
 export function useAuth() {
-  const { user, signIn } = useContext(AuthContext);
-  return { user, signIn }
+  const { user, signIn, setUser } = useContext(AuthContext);
+  return { user, signIn, setUser }
 }

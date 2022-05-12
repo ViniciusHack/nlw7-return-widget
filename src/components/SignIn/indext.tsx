@@ -2,7 +2,7 @@ import { GoogleLogo } from "phosphor-react";
 import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
   
   return (
     <section className="my-0 mx-auto w-max max-w-4xl">

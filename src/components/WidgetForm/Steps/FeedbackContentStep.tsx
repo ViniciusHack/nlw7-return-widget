@@ -1,6 +1,7 @@
 import { ArrowLeft } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from "..";
+import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../lib/api";
 import { CloseButton } from "../../CloseButton";
 import { Loading } from "../../Loading";
@@ -14,6 +15,7 @@ interface FeedbackContentStepProps {
 
 export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested, onFeedbackSent }: FeedbackContentStepProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null);
+  const { user } = useAuth();
   const [comment, setComment] = useState('');
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
@@ -23,11 +25,14 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested, 
     e.preventDefault()
     setIsSendingFeedback(true);
     
-    await api.post('/feedbacks', {
-      type: feedbackType,
-      comment,
-      screenshot
-    })
+    if(user) {
+      await api.post('/feedbacks', {
+        type: feedbackType,
+        comment,
+        screenshot,
+        email: user.email
+      });
+    }
 
     onFeedbackSent();
   }
